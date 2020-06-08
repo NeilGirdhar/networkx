@@ -1,3 +1,4 @@
+from typing import Type
 import pytest
 
 import networkx as nx
@@ -1011,7 +1012,7 @@ class TestInMultiEdgeView(TestMultiEdgeView):
 # Degrees
 class TestDegreeView:
     GRAPH = nx.Graph
-    dview = nx.reportviews.DegreeView
+    dview: Type[nx.reportviews.DegreeView] = nx.reportviews.DegreeView
 
     @classmethod
     def setup_class(cls):

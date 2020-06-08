@@ -1,3 +1,4 @@
+from typing import Union
 import pytest
 
 pytest.importorskip("numpy")
@@ -7,6 +8,7 @@ import random
 from networkx import random_reference, lattice_reference, sigma, omega
 import networkx as nx
 
+rng: Union[random.Random, int]
 rng = random.Random(0)
 rng = 42
 

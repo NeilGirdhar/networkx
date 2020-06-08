@@ -1,3 +1,4 @@
+from typing import List, Tuple, Set
 import pytest
 
 import networkx as nx
@@ -193,8 +194,8 @@ class TestMultiDiGraphView(TestMultiGraphView, TestSubDiGraphView):
     graph = nx.MultiDiGraph
     hide_edges_filter = staticmethod(nx.filters.hide_multidiedges)
     show_edges_filter = staticmethod(nx.filters.show_multidiedges)
-    hide_edges = [(2, 3, 0), (8, 7, 0), (222, 223, 0)]
-    excluded = {(2, 3, 0), (3, 4, 0), (4, 5, 0), (5, 6, 0)}
+    hide_edges: List[Tuple[int, int, int]] = [(2, 3, 0), (8, 7, 0), (222, 223, 0)]
+    excluded: Set[Tuple[int, int, int]] = {(2, 3, 0), (3, 4, 0), (4, 5, 0), (5, 6, 0)}
 
     def test_inout_degree(self):
         edges_gone = self.hide_edges_filter(self.hide_edges)

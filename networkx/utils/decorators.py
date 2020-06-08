@@ -2,6 +2,7 @@ from collections import defaultdict
 from os.path import splitext
 from contextlib import contextmanager
 from pathlib import Path
+from typing import Callable, DefaultDict, IO
 import warnings
 
 import networkx as nx
@@ -93,7 +94,7 @@ def not_implemented_for(*graph_types):
 
 # To handle new extensions, define a function accepting a `path` and `mode`.
 # Then add the extension to _dispatch_dict.
-_dispatch_dict = defaultdict(lambda: open)
+_dispatch_dict: DefaultDict[str, Callable[..., IO]] = defaultdict(lambda: open)
 _dispatch_dict[".gz"] = gzip.open
 _dispatch_dict[".bz2"] = bz2.BZ2File
 _dispatch_dict[".gzip"] = gzip.open

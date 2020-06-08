@@ -15,7 +15,20 @@ See Also
 --------
 nx_agraph, nx_pydot
 """
+from __future__ import annotations
+
 import warnings
+from typing import (
+    Any,
+    TYPE_CHECKING,
+    Callable,
+    Dict,
+    Iterable,
+    Optional,
+    TypeVar,
+    Union,
+)
+
 import networkx as nx
 from collections.abc import Collection, Generator, Iterator
 
@@ -30,7 +43,11 @@ __all__ = [
 ]
 
 
-def to_networkx_graph(data, create_using=None, multigraph_input=False):
+def to_networkx_graph(
+    data: Data,
+    create_using: Optional[Union[G, Callable[[], G]]] = None,
+    multigraph_input: bool = False,
+) -> G:
     """Make a NetworkX graph from a known data structure.
 
     The preferred way to call this is automatically
@@ -489,3 +506,26 @@ def from_edgelist(edgelist, create_using=None):
     G = nx.empty_graph(0, create_using)
     G.add_edges_from(edgelist)
     return G
+
+
+if TYPE_CHECKING:
+    from networkx.classes.graph import Graph, Node, EdgePlus
+
+    G = TypeVar("G", bound=Graph)
+
+    try:
+        import numpy
+    except ImportError:
+        pass
+    try:
+        import scipy
+    except ImportError:
+        pass
+    Data = Union[
+        Graph,
+        Dict[Node, Dict[Node, Dict[str, Any]]],
+        Dict[Node, Iterable[Node]],
+        Iterable[EdgePlus],
+        numpy.ndarray,
+        scipy.sparse.base.spmatrix,
+    ]

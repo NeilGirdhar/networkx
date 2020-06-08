@@ -83,6 +83,7 @@ EdgeDataView
     The argument `nbunch` restricts edges to those incident to nodes in nbunch.
 """
 from collections.abc import Mapping, Set
+from typing import Type
 import networkx as nx
 
 __all__ = [
@@ -998,7 +999,7 @@ class OutEdgeView(Set, Mapping):
     def _from_iterable(cls, it):
         return set(it)
 
-    dataview = OutEdgeDataView
+    dataview: Type[OutEdgeDataView] = OutEdgeDataView
 
     def __init__(self, G):
         self._graph = G

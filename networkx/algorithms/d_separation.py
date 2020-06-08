@@ -42,7 +42,7 @@ References
 
 .. [1] Pearl, J.  (2009).  Causality.  Cambridge: Cambridge University Press.
 
-.. [2] Darwiche, A.  (2009).  Modeling and reasoning with Bayesian networks. 
+.. [2] Darwiche, A.  (2009).  Modeling and reasoning with Bayesian networks.
    Cambridge: Cambridge University Press.
 
 .. [3] Shachter, R.  D.  (1998).
@@ -58,7 +58,7 @@ References
 """
 
 from collections import deque
-from typing import AbstractSet
+from typing import Set, TypeVar
 
 import networkx as nx
 from networkx.utils import not_implemented_for, UnionFind
@@ -66,8 +66,11 @@ from networkx.utils import not_implemented_for, UnionFind
 __all__ = ["d_separated"]
 
 
+_T = TypeVar("_T")
+
+
 @not_implemented_for("undirected")
-def d_separated(G: nx.DiGraph, x: AbstractSet, y: AbstractSet, z: AbstractSet) -> bool:
+def d_separated(G: nx.DiGraph[_T], x: Set[_T], y: Set[_T], z: Set[_T]) -> bool:
     """
     Return whether node sets ``x`` and ``y`` are d-separated by ``z``.
 
