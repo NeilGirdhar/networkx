@@ -72,7 +72,9 @@ class TestThinGraph(BaseGraphTester):
         all_edge_dict = {'weight': 1}
 
         class MyGraph(nx.Graph):
-            def edge_attr_dict_factory(self): return all_edge_dict
+            @staticmethod
+            def edge_attr_dict_factory():
+                return all_edge_dict
         self.Graph = MyGraph
         # build dict-of-dict-of-dict K3
         ed1, ed2, ed3 = (all_edge_dict, all_edge_dict, all_edge_dict)
@@ -112,7 +114,9 @@ class TestThinDiGraph(BaseDiGraphTester):
         all_edge_dict = {'weight': 1}
 
         class MyGraph(nx.DiGraph):
-            def edge_attr_dict_factory(self): return all_edge_dict
+            @staticmethod
+            def edge_attr_dict_factory():
+                return all_edge_dict
         self.Graph = MyGraph
         # build dict-of-dict-of-dict K3
         ed1, ed2, ed3 = (all_edge_dict, all_edge_dict, all_edge_dict)
